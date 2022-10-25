@@ -8,11 +8,10 @@ export const Info = () => {
       const cursor = LinksCollection.find();
 
       cursor.observe({
-          changed: (newDocument, oldDocument) => {
-              console.log('changed', newDocument, oldDocument);
+          changedAt: (newDocument, oldDocument, index) => {
+              console.log('changed at', oldDocument, newDocument, index);
           }
       });
-
 
     return cursor.fetch();
   });
@@ -29,7 +28,7 @@ export const Info = () => {
               }
           }
       }, (err, res) => {
-          console.log(err, res);
+         console.log(err, res);
       });
 
   }
@@ -39,7 +38,7 @@ export const Info = () => {
       <h2>Learn Meteor!</h2>
       <ul>{links.map(
         link => <li key={link._id}>
-          <a  onClick={ () => updateLink(link._id) }>{link.title}</a>
+          <a onClick={ () => updateLink(link._id) }>{link.title}</a>
         </li>
       )}</ul>
     </div>
